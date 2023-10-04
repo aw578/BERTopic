@@ -3790,6 +3790,8 @@ class BERTopic:
             documents: Updated dataframe with documents and the reduced number of Topics
         """
         topics = documents.Topic.tolist().copy()
+        if(len(list(documents.Topic.unique())) <= self._outliers):
+            return documents
         unique_topics = sorted(list(documents.Topic.unique()))[self._outliers:]
         max_topic = unique_topics[-1]
 
